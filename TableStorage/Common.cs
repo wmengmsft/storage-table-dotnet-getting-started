@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading.Tasks;
 using Microsoft.Azure.CosmosDB.Table;
 using Microsoft.Azure.Storage;
-using Microsoft.Azure;
 
 namespace TableStorage
 {
@@ -44,7 +44,7 @@ namespace TableStorage
         public static async Task<CloudTable> CreateTableAsync(string tableName)
         {
             // Retrieve storage account information from connection string.
-            CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(CloudConfigurationManager.GetSetting("StorageConnectionString"));
+            CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(ConfigurationManager.AppSettings["StorageConnectionString"]);
 
             // Create a table client for interacting with the table service
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();

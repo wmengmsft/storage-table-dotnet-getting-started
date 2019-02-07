@@ -1,8 +1,8 @@
-﻿using Microsoft.Azure;
+﻿using System;
+using System.Configuration;
+using System.Threading.Tasks;
 using Microsoft.Azure.CosmosDB.Table;
 using Microsoft.Azure.Storage;
-using System;
-using System.Threading.Tasks;
 using TableStorage.Model;
 
 namespace TableStorage
@@ -106,7 +106,7 @@ namespace TableStorage
         /// <returns>true if azure cosmosdb table</returns>
         public static bool IsAzureCosmosdbTable()
         {
-            string connectionString = CloudConfigurationManager.GetSetting("StorageConnectionString");
+            string connectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
             return !String.IsNullOrEmpty(connectionString) && connectionString.Contains("table.cosmosdb");
         }
     }
